@@ -1,0 +1,61 @@
+{% load static %}
+
+<html>
+
+</style>
+
+	<head>
+		<meta charset="UTF-8">
+		
+		<title> {% block title %}{{ title }}{% endblock %}</title>
+		<link rel="stylesheet" href="{% static 'main/css/bootstrap.css' %}">
+<style>
+	header {
+    background-color: #ADFF2F;}
+body {
+	background-color: #fff;
+  --bs-body-font-family: var(--bs-font-monospace);
+  --bs-body-line-height: 1.4;
+  --bs-body-bg: var(--bs-gray-100);
+
+}</style>
+	</head>
+	
+	<header> {% block header %}<div align="center"> <h1>{{ title }}</h1></div>{% endblock %}</header>
+
+	<body>
+
+					{%if user.is_authenticated %}
+						<p>Приветствую {{ user.username }}!</p>
+							<p><li class="active"><a href="{% url 'profile' user.pk %}">
+          		 			<button type="button" class="btn btn-success">Мой профиль</button></a></li></p>
+
+							<p><li class="active"><a href="{% url 'logout' %}">
+          		 			<button type="button" class="btn btn-success">Выйти</button></a></li></p>
+
+        	 			  <p><li class="active"><a href="{% url 'index' %}">
+        	 			  <button type="button" class="btn btn-success">Главная страница</button></a></li></p>
+
+
+					{% else %}
+						<p>Здравствуй гость</p>
+          		 		<p><li class="active"><a href="{% url 'login' %}">
+          		 		<button type="button" class="btn btn-success">Войти</button></a></li></p>
+
+						<p><li class="active"><a href="{% url 'signup' %}">
+          		 		<button type="button" class="btn btn-success">Зарегистрироваться</button></a></li></p>
+          				
+          				
+					{% endif %}
+				
+
+		{% block content %}
+
+		{% endblock %}
+
+		{% block profile %}
+
+		{% endblock %}
+	</body>
+	
+</html>
